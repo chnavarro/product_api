@@ -3,10 +3,11 @@ package com.tizo.productapi.configuration.security;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tizo.productapi.exception.JWTForbiddenException;
-import io.jsonwebtoken.ClaimJwtException;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -25,7 +26,9 @@ import static java.util.Collections.emptyList;
  */
 public class JwtUtil {
 
-    static final String SECRET_KEY = "T1z04pi";
+    private static final Logger logger = LoggerFactory.getLogger(JwtUtil.class);
+
+    private static final String SECRET_KEY = "T1z04pi";
 
     static void addAuthentication(HttpServletResponse res, String username) {
 
@@ -34,6 +37,7 @@ public class JwtUtil {
                 .setExpiration(new Date(System.currentTimeMillis() + 600000))
                 .signWith(SignatureAlgorithm.HS512, SECRET_KEY)
                 .compact();
+        logger.info("Return token for : " + username);
         res.addHeader("Authorization", "Bearer " + token);
     }
 
@@ -46,10 +50,10 @@ public class JwtUtil {
                         .parseClaimsJws(token.replace("Bearer", ""))
                         .getBody()
                         .getSubject();
-
-                return user != null ?
-                        new UsernamePasswordAuthenticationToken(user, null, emptyList()) :
-                        null;
+                if (user != null) {
+                    logger.info("Authorization for : " + user);
+                    return new UsernamePasswordAuthenticationToken(user, null, emptyList());
+                }
             }
             return null;
         } catch (ExpiredJwtException e) {

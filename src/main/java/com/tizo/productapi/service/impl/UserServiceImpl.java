@@ -111,8 +111,8 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional(readOnly = true)
     public UserDTO findByUserName(String userName) {
-        User bag = repository.findByUserName(userName).orElseThrow(
+        User user = repository.findByUserName(userName).orElseThrow(
                 () -> new ResourceNotFoundException("User not found"));
-        return mapper.convertValue(bag, UserDTO.class);
+        return mapper.convertValue(user, UserDTO.class);
     }
 }

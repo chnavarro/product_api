@@ -2,6 +2,8 @@ package com.tizo.productapi.configuration.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tizo.productapi.dto.UserDTO;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -24,6 +26,8 @@ import java.util.Collections;
  */
 public class LoginFilter extends AbstractAuthenticationProcessingFilter {
 
+    private static final Logger logger = LoggerFactory.getLogger(LoginFilter.class);
+
     public LoginFilter(String url, AuthenticationManager authManager) {
         super(new AntPathRequestMatcher(url));
         setAuthenticationManager(authManager);
@@ -34,7 +38,7 @@ public class LoginFilter extends AbstractAuthenticationProcessingFilter {
             throws AuthenticationException, IOException, ServletException {
         InputStream body = req.getInputStream();
         UserDTO user = new ObjectMapper().readValue(body, UserDTO.class);
-
+        logger.info("Logging attempt: " + user.getUserName());
         return getAuthenticationManager().authenticate(
                 new UsernamePasswordAuthenticationToken(
                         user.getUserName(),

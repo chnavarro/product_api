@@ -64,7 +64,7 @@ public class User {
     @Enumerated(EnumType.STRING)
     private UserRole userRole;
 
-    @Column(name = "USER_STATUS", length = 11, columnDefinition = "BIT")
+    @Column(name = "USER_STATUS", columnDefinition = "BIT")
     @ColumnDefault("1")
     private Boolean userStatus;
 }

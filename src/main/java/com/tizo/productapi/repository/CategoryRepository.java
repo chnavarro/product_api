@@ -1,6 +1,6 @@
 package com.tizo.productapi.repository;
 
-import com.tizo.productapi.model.User;
+import com.tizo.productapi.model.Category;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -12,7 +12,8 @@ import java.util.Optional;
  * @since 2022-11-03
  */
 @Repository
-public interface UserRepository extends JpaRepository<User, String> {
-    Optional<User> findByUserName(String userName);
+public interface CategoryRepository extends JpaRepository<Category, Long> {
+
+    Optional<Category> findByCategoryId(Long categoryId);
 
 }

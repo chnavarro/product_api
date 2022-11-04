@@ -27,11 +27,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     private BCryptPasswordEncoder encoder;
 
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable().authorizeRequests()
+        http.csrf().disable()
+                .authorizeRequests()
                 .antMatchers("/login").permitAll()
+//                .antMatchers("/user/**").hasAnyAuthority("ADMIN")
+//                .and().authorizeRequests()
+//                .antMatchers("/category").access("hasAnyRole('USER, ADMIN')")
                 .anyRequest().authenticated()
                 .and()
                 .addFilterBefore(new LoginFilter("/login", authenticationManager()),

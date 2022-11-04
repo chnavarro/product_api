@@ -1,5 +1,7 @@
 package com.tizo.productapi.configuration.security;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.GenericFilterBean;
@@ -19,11 +21,14 @@ import java.io.IOException;
  */
 public class JwtFilter extends GenericFilterBean {
 
+    private static final Logger logger = LoggerFactory.getLogger(JwtFilter.class);
+
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain)
             throws IOException, ServletException {
         Authentication authentication = JwtUtil.getAuthentication((HttpServletRequest) request, (HttpServletResponse) response);
         SecurityContextHolder.getContext().setAuthentication(authentication);
+        logger.info("Authentication " + authentication.getName() + ", Authenticated: " + authentication.isAuthenticated());
         filterChain.doFilter(request, response);
     }
 }
