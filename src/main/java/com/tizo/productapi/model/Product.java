@@ -1,5 +1,6 @@
 package com.tizo.productapi.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -61,6 +62,7 @@ public class Product {
     @ColumnDefault("1")
     private Boolean productStatus;
 
+    @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "CAT_ID", nullable = false)
     private Category category;

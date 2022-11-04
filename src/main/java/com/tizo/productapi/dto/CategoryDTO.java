@@ -1,6 +1,7 @@
 package com.tizo.productapi.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -28,5 +29,6 @@ public class CategoryDTO {
     private Date categoryCreateDate;
     private Date categoryLastUpdate;
     private Boolean categoryStatus;
+    @JsonManagedReference
     private List<ProductDTO> products;
 }

@@ -4,7 +4,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tizo.productapi.dto.NewProductDTO;
 import com.tizo.productapi.dto.ProductDTO;
 import com.tizo.productapi.exception.ResourceNotFoundException;
+import com.tizo.productapi.model.Category;
 import com.tizo.productapi.model.Product;
+import com.tizo.productapi.repository.CategoryRepository;
 import com.tizo.productapi.repository.ProductRepository;
 import com.tizo.productapi.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -24,11 +27,13 @@ import java.util.stream.Collectors;
 public class ProductServiceImpl implements ProductService {
 
     private ProductRepository repository;
+    private CategoryRepository categoryRepository;
     private ObjectMapper mapper;
 
     @Autowired
-    public ProductServiceImpl(ProductRepository repository, ObjectMapper mapper) {
+    public ProductServiceImpl(ProductRepository repository, CategoryRepository categoryRepository, ObjectMapper mapper) {
         this.repository = repository;
+        this.categoryRepository = categoryRepository;
         this.mapper = mapper;
     }
 
@@ -45,6 +50,9 @@ public class ProductServiceImpl implements ProductService {
         product.setProductCost(newProductDTO.getProductCost());
         product.setProductPrice(newProductDTO.getProductPrice());
         product.setProductTags(newProductDTO.getProductTags());
+        Category category = categoryRepository.findByCategoryId(newProductDTO.getCategoryId()).orElseThrow(
+                () -> new ResourceNotFoundException("Category not found"));
+        product.setCategory(category);
         product = repository.save(product);
         return mapper.convertValue(product, ProductDTO.class);
     }
@@ -65,6 +73,9 @@ public class ProductServiceImpl implements ProductService {
         product.setProductPrice(newProductDTO.getProductPrice());
         product.setProductTags(newProductDTO.getProductTags());
         product.setProductStatus(newProductDTO.getProductStatus());
+        Category category = categoryRepository.findByCategoryId(newProductDTO.getCategoryId()).orElseThrow(
+                () -> new ResourceNotFoundException("Category not found"));
+        product.setCategory(category);
         product.setProductLastUpdate(new Date());
         product = repository.save(product);
         return mapper.convertValue(product, ProductDTO.class);

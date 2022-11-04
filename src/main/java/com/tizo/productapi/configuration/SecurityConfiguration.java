@@ -32,9 +32,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/login").permitAll()
-//                .antMatchers("/user/**").hasAnyAuthority("ADMIN")
-//                .and().authorizeRequests()
-//                .antMatchers("/category").access("hasAnyRole('USER, ADMIN')")
+                //TODO - Implement security access control
+//                .antMatchers("/user").hasAuthority("ADMIN")
+//                .antMatchers("/product").hasAnyAuthority("ADMIN", "USER")
+//                .antMatchers("/category").hasAnyAuthority("ADMIN", "USER")
                 .anyRequest().authenticated()
                 .and()
                 .addFilterBefore(new LoginFilter("/login", authenticationManager()),

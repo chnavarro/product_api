@@ -1,6 +1,7 @@
 package com.tizo.productapi.model;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -54,6 +55,7 @@ public class Category {
     @ColumnDefault("1")
     private Boolean categoryStatus;
 
+    @JsonBackReference
     @OneToMany(cascade = CascadeType.ALL,
             orphanRemoval = true, mappedBy = "category")
     @Setter(AccessLevel.PRIVATE)

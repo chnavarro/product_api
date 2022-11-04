@@ -1,5 +1,6 @@
 package com.tizo.productapi.dto;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -31,6 +32,7 @@ public class ProductDTO {
     private Date productCreateDate;
     private Date productLastUpdate;
     private Boolean productStatus;
-    private Long categoryId;
+    @JsonBackReference
+    private CategoryDTO category;
 
 }
