@@ -31,6 +31,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
+                .antMatchers("/rest-api-docs/**", "/swagger-ui/**").permitAll()
                 .antMatchers("/login").permitAll()
                 //TODO - Implement security access control
 //                .antMatchers("/user").hasAuthority("ADMIN")

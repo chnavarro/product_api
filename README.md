@@ -1,6 +1,4 @@
-# Project Title
-
-Product API
+# Product API
 
 ## Description
 
@@ -58,7 +56,7 @@ gradle bootRun
 
 ### Test program
 
-* Using Insomnia, import the file **Insomnia_product_api** in the root folder.
+* Using Insomnia, import the file **Insomnia_product_api.json** in the root folder.
 * Also, you can use **Swagger** to explore and test, just got to [swagger-ui](http://localhost:8080/swagger-ui)
 
 ## Authors
