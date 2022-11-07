@@ -13,13 +13,13 @@ Develop a service environment that allows exposing a REST API for consumption by
         * JWT
         * Flyway DB
         * Swagger (Open API)
-        * PostgreSQL 42+
+        * PostgreSQL Driver v42+
 
 ## Getting Started
 
 ### Dependencies
 
-* PostgreSQL >= v42
+* PostgreSQL >= 12
 * Java JDK 1.8
 * Gradle
 * A favorite text editor or IDE
