@@ -21,7 +21,7 @@ import java.util.Date;
  * @since 2022-11-03
  */
 @Entity
-@Table(name = "[USER]")
+@Table(name = "API_USER")
 @Getter
 @Setter
 @NoArgsConstructor

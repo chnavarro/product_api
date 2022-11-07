@@ -37,10 +37,13 @@ public class ProductApiApplication {
 	@Bean
 	InitializingBean sendDatabase() {
 		return () -> {
+            userService.deleteAll();
 			userService.create(new NewUserDTO("admin", "Administrator", "adminPassword",null, "ADMIN", true));
 			userService.create(new NewUserDTO("tester", "User Tester", "testerPassword", null, "USER", true));
 
-			//TODO - Fix for duplicate categories
+            categoryService.deleteAll();
+            productService.deleteAll();
+
 			CategoryDTO categoryDTO = categoryService.create(new NewCategoryDTO(null, "Groceries", true));
 
 			productService.create(new NewProductDTO(null, "Bread", new BigDecimal(10), new BigDecimal(15), "Bread", true, categoryDTO.getCategoryId()));

@@ -27,4 +27,7 @@ public interface UserService {
 
     @Transactional(readOnly = true)
     UserDTO findByUserName(String userName);
+
+    @Transactional
+    void deleteAll();
 }

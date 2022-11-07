@@ -27,4 +27,7 @@ public interface CategoryService {
 
     @Transactional(readOnly = true)
     CategoryDTO findByCategoryId(Long categoryId);
+
+    @Transactional
+    void deleteAll();
 }

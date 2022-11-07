@@ -115,4 +115,12 @@ public class UserServiceImpl implements UserService {
                 () -> new ResourceNotFoundException("User not found"));
         return mapper.convertValue(user, UserDTO.class);
     }
+
+    /**
+     * Find all users and delete them
+     */
+    @Transactional
+    public void deleteAll() {
+        repository.deleteAll(repository.findAll());
+    }
 }

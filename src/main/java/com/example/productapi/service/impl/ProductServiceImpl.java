@@ -116,4 +116,12 @@ public class ProductServiceImpl implements ProductService {
                 () -> new ResourceNotFoundException("Product not found"));
         return mapper.convertValue(product, ProductDTO.class);
     }
+
+    /**
+     * Find all users and delete them
+     */
+    @Transactional
+    public void deleteAll() {
+        repository.deleteAll(repository.findAll());
+    }
 }

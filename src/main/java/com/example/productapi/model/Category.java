@@ -28,7 +28,7 @@ import java.util.List;
  * @since 2022-11-03
  */
 @Entity
-@Table(name = "[CATEGORY]")
+@Table(name = "CATEGORY")
 @Getter
 @Setter
 @NoArgsConstructor

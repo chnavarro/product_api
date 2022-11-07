@@ -25,7 +25,7 @@ import java.util.Date;
  * @since 2022-11-03
  */
 @Entity
-@Table(name = "[PRODUCT]")
+@Table(name = "PRODUCT")
 @Getter
 @Setter
 @NoArgsConstructor

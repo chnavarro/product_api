@@ -27,4 +27,7 @@ public interface ProductService {
 
     @Transactional(readOnly = true)
     ProductDTO findByProductById(Long productId);
+
+    @Transactional
+    void deleteAll();
 }

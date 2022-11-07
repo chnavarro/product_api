@@ -101,4 +101,12 @@ public class CategoryServiceImpl implements CategoryService {
                 () -> new ResourceNotFoundException("Category not found"));
         return mapper.convertValue(category, CategoryDTO.class);
     }
+
+    /**
+     * Find all users and delete them
+     */
+    @Transactional
+    public void deleteAll() {
+        repository.deleteAll(repository.findAll());
+    }
 }

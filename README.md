@@ -13,13 +13,13 @@ Develop a service environment that allows exposing a REST API for consumption by
         * JWT
         * Flyway DB
         * Swagger (Open API)
-        * MS SQL Server
+        * PostgreSQL 42+
 
 ## Getting Started
 
 ### Dependencies
 
-* MS SQL Server 2019+
+* PostgreSQL >= v42
 * Java JDK 1.8
 * Gradle
 * A favorite text editor or IDE
@@ -31,21 +31,21 @@ Develop a service environment that allows exposing a REST API for consumption by
 
 * On resources/application.properties you need to change the database parameter
 ```
-spring.datasource.url=jdbc:sqlserver://localhost\\SQLEXPRESS:1433;database=product_api_db
-spring.datasource.username=apiusr
-spring.datasource.password=strongPassword
+spring.datasource.url=jdbc:postgresql://localhost:5432/product_api_db
+spring.datasource.username=postgres
+spring.datasource.password=...
 
 ....
 
-spring.flyway.url = jdbc:sqlserver://localhost\\SQLEXPRESS:1433;database=product_api_db
-spring.flyway.schemas = product_api_db
-spring.flyway.user = apiusr
-spring.flyway.password = strongPassword
+spring.flyway.url = jdbc:postgresql://localhost:5432/product_api_db
+spring.flyway.schemas = public
+spring.flyway.user = postgres
+spring.flyway.password = ...
 ```
 
 * The tables and others DB objects will be built by **Flywaydb** on application initialization.
 
-* The data is auto-populated by the application start-up.
+* The data is auto-populated by the application initialization.
 
 ### Executing program
 
